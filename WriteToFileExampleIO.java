@@ -3,17 +3,35 @@ package IO;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 public class WriteToFileExampleIO {
     
       
-       
+     public static void writeUsingFileWriter(String data){
+         FileWriter fw=null;
+         File file=new File("test.txt");
+         try{
+             fw=new FileWriter(file,true);
+             fw.write(data);
+         }catch(IOException e){
+             e.printStackTrace();
+         }finally{
+             try{
+                 fw.close();
+             }catch(IOException e){
+                 e.printStackTrace();
+             }
+         }
+         
+     }  
      public static void writeUsingOutputStream(String data){
          OutputStream os=null;
-         File file =new File("C:\\Users\\Emilaga\\Desktop\\setup.txt");
+         File file =new File("test.txt");
          try{
              os=new FileOutputStream(file,true);
-         os.write(data.getBytes());
+         os.write(data.getBytes(),0,data.length());
+             
      }catch(IOException ex){
          ex.printStackTrace();
      }finally{
@@ -24,13 +42,13 @@ public class WriteToFileExampleIO {
              }
          }
         
-        
+       
      }
      
      
      public static void main(String[] args) {
-          String data="salam aleykum";
-        writeUsingOutputStream(data);  
+          String data="salam aleykum esq olsun qardaslara";
+        writeUsingFileWriter(data);
     }
         
     }
