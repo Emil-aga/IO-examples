@@ -27,6 +27,7 @@ public class WriteToFileExampleIO {
          }
          
      }  
+     
      public static void writeUsingOutputStream(String data){
          OutputStream os=null;
          File file =new File("test.txt");
@@ -47,6 +48,7 @@ public class WriteToFileExampleIO {
         
        
      }
+     
      public static void writeUsingBufferedWriterAutoCloseable(String data){
          File file =new File("qaqam.txt");
          
@@ -59,6 +61,7 @@ public class WriteToFileExampleIO {
              e.printStackTrace();
          }
      }
+     
      public static void writeUsingBufferedWriter(String data){
          File file=new File("test.txt");
          FileWriter fw=null;
@@ -72,8 +75,11 @@ public class WriteToFileExampleIO {
          }finally{
              try{
                  if(bw!=null){
-                 bw.close();
+                 bw.close();}
+                 if(fw!=null){
+                     fw.close();
                  }
+                 
                  
              }
              catch(IOException e){
@@ -81,6 +87,7 @@ public class WriteToFileExampleIO {
              }
          }
      }
+     
      public static void main(String[] args) {
           String data="Bu bir Datadir";
         writeUsingBufferedWriter(data);
