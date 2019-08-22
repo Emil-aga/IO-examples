@@ -1,10 +1,12 @@
 
 package IO;
+import java.io.BufferedWriter;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+
 public class WriteToFileExampleIO {
     
       
@@ -30,6 +32,7 @@ public class WriteToFileExampleIO {
          File file =new File("test.txt");
          try{
              os=new FileOutputStream(file,true);
+            
          os.write(data.getBytes(),0,data.length());
              
      }catch(IOException ex){
@@ -44,11 +47,43 @@ public class WriteToFileExampleIO {
         
        
      }
-     
-     
+     public static void writeUsingBufferedWriterAutoCloseable(String data){
+         File file =new File("qaqam.txt");
+         
+            try( BufferedWriter bw=new BufferedWriter(new FileWriter(file))){
+            
+             bw.write(data);
+             //no need to close it
+             //bw.close()
+         }catch(IOException e){
+             e.printStackTrace();
+         }
+     }
+     public static void writeUsingBufferedWriter(String data){
+         File file=new File("test.txt");
+         FileWriter fw=null;
+         BufferedWriter bw=null;
+         try{
+             fw=new FileWriter(file);
+             bw=new BufferedWriter(fw);
+             bw.write(data);
+         }catch(IOException e){
+             e.printStackTrace();
+         }finally{
+             try{
+                 if(bw!=null){
+                 bw.close();
+                 }
+                 
+             }
+             catch(IOException e){
+                 e.printStackTrace();
+             }
+         }
+     }
      public static void main(String[] args) {
-          String data="salam aleykum esq olsun qardaslara";
-        writeUsingFileWriter(data);
+          String data="Bu bir Datadir";
+        writeUsingBufferedWriter(data);
     }
         
     }
